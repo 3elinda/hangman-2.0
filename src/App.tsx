@@ -1,14 +1,19 @@
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Categories from "./pages/Categories";
+import Game from "./pages/Game";
+// bringing in 3 new pages
+
 function App() {
   // just a regular function
   return (
-    // instead of returning a number/word, this function returns HTML
-    // React- functions that return HTML
-    <div className="flex flex-col items-center gap-8 p-8">
-      <h1 className="text-4xl font-bold">Hangman</h1>
-      <p>Word display goes here</p>
-      <p>Keyboard goes here</p>
-    </div>
-    // Looks & works like HTML but it's called JSX (HTML living inside JS/TS)
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/categories" element={<Categories />} />
+      <Route path="/game" element={<Game />} />
+    </Routes>
+    //<Routes> a wrapper, everything inside is navigation
+    //<Route path="/" element={<Home />} /> when the URL is /, show Home component
   );
 }
 
