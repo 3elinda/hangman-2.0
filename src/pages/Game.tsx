@@ -1,3 +1,4 @@
+import WordDisplay from "../components/WordDisplay";
 // useState is how React remembers things, a way to store values that React keeps track of
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -34,9 +35,10 @@ function Game() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-8">
+    <div className="flex flex-col items-center gap-8 pt-16">
       <h1 className="text-4xl font-bold">{category}</h1>
-      <p>The word is: {word}</p>
+      {/* <p>The word is: {word}</p> */}
+      <WordDisplay word={word} guessedLetters={[]} />
     </div>
   );
 }
