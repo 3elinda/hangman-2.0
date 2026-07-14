@@ -3,6 +3,7 @@ import WordDisplay from "../components/WordDisplay";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getWord } from "../services/wordService";
+import Keyboard from "../components/keyboard";
 
 function Game() {
   // useLocation is a React Router tool that lets info to be read about current page, including any state passed to it
@@ -15,6 +16,19 @@ function Game() {
   const [word, setWord] = useState("");
   const [loading, setLoading] = useState(true);
   // loading starts as true but once word arrives it is set to false
+
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+  // stores an array of strings, every letter that has been guessed. starts as an empty array []
+  // <string[]> it is specifically an array of strings
+
+  function handleGuess(letter: string) {
+    setGuessedLetters((prev) => [...prev, letter]);
+  }
+  // every time a keyboard button is clicked, the function runs and adds the clicked letter to the guessedLetters array
+  // prev => [...prev, letter]  prev is the previous array of guessed letters
+  // ...prev 'spreads out everyting that was already there
+  // , letter adds the new letter at the end
+  // Ex: ['a', 'b'] and c was clicked, becomes ['a', 'b', 'c']
 
   // useEffect runs code at a specific moment, without it the fetch would run on every re-render
   useEffect(() => {
@@ -35,10 +49,22 @@ function Game() {
   }
 
   return (
-    <div className="flex flex-col items-center gap-8 pt-16">
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "2rem",
+        padding: "4rem 1",
+      }}
+    >
       <h1 className="text-4xl font-bold">{category}</h1>
       {/* <p>The word is: {word}</p> */}
-      <WordDisplay word={word} guessedLetters={[]} />
+      <WordDisplay word={word} guessedLetters={guessedLetters} />
+      <Keyboard guessedLetters={guessedLetters} onGuess={handleGuess} />
+      {/* both compotents recieve guessedLetters so they stay in sync */}
+      {/* WordDisplay uses it decide which letter to reveal, keyboard uses it to fade out already clicked buttons */}
+      {/* onGuess={handledGuess} passes the function down to keyboard, wehn a button is clicked it can tell Game.tsx */}
     </div>
   );
 }
