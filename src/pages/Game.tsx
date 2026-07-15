@@ -30,6 +30,21 @@ function Game() {
   // , letter adds the new letter at the end
   // Ex: ['a', 'b'] and c was clicked, becomes ['a', 'b', 'c']
 
+  const incorrectGuesses = guessedLetters.filter(
+    (letter) => !word.includes(letter),
+  );
+  // filters through alll guessed letters and keeps that ones not included in the word
+  // !word.includes(letter) means letter is not in the word
+
+  // checks if every letter in the word has been guessed
+  // .every() returns true only if all items in the array pass the check
+  const hasWon = word
+    .split("")
+    .every((letter) => guessedLetters.includes(letter));
+
+  // checks if incorrect guessed reached 6
+  const hasLost = incorrectGuesses.length >= 8;
+
   // useEffect runs code at a specific moment, without it the fetch would run on every re-render
   useEffect(() => {
     async function fetchWord() {
@@ -60,6 +75,43 @@ function Game() {
     >
       <h1 className="text-4xl font-bold">{category}</h1>
       {/* <p>The word is: {word}</p> */}
+
+      <p style={{ fontSize: "1.2rem" }}>
+        Incorrect guesses: {incorrectGuesses.length} / 8
+      </p>
+
+      {hasWon && (
+        <div
+          style={{
+            backgroundColor: "green",
+            color: "white",
+            padding: "2rem",
+            borderRadius: "8px",
+            textAlign: "center",
+          }}
+        >
+          <p style={{ fontSize: "2rem", fontWeight: "bold" }}>You Won!</p>
+          <p>The wor was: {word}</p>
+        </div>
+      )}
+      {/* {hasWon && (...) if hasWon is true, show this} */}
+
+      {hasLost && (
+        <div
+          style={{
+            backgroundColor: "red",
+            color: "white",
+            padding: "2rem",
+            borderRadius: "8px",
+            textAlign: "center",
+          }}
+        >
+          <p style={{ fontSize: "2rem", fontWeight: "bold" }}>
+            Off with his Head!
+          </p>
+          <p>The word was: {word}</p>
+        </div>
+      )}
       <WordDisplay word={word} guessedLetters={guessedLetters} />
       <Keyboard guessedLetters={guessedLetters} onGuess={handleGuess} />
       {/* both compotents recieve guessedLetters so they stay in sync */}
