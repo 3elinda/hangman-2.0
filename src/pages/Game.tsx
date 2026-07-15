@@ -30,6 +30,18 @@ function Game() {
   // , letter adds the new letter at the end
   // Ex: ['a', 'b'] and c was clicked, becomes ['a', 'b', 'c']
 
+  function handlePlayAgain() {
+    // clears all guessed letters back to empty
+    setGuessedLetters([]);
+    // shows the loading message while fetching
+    setLoading(true);
+    // fetches a new word, .then() is similar to await, waits for the word to arrive then runs code inside
+    getWord(category).then((newWord) => {
+      setWord(newWord);
+      setLoading(false);
+    });
+  }
+
   const incorrectGuesses = guessedLetters.filter(
     (letter) => !word.includes(letter),
   );
@@ -91,7 +103,22 @@ function Game() {
           }}
         >
           <p style={{ fontSize: "2rem", fontWeight: "bold" }}>You Won!</p>
-          <p>The wor was: {word}</p>
+          <p>The word was: {word}</p>
+          <button
+            onClick={handlePlayAgain}
+            style={{
+              marginTop: "1rem",
+              padding: "0.5rem 1.5rem",
+              fontSize: "1rem",
+              fontWeight: "bold",
+              backgroundColor: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+          >
+            Play Me Again
+          </button>
         </div>
       )}
       {/* {hasWon && (...) if hasWon is true, show this} */}
@@ -110,10 +137,29 @@ function Game() {
             Off with his Head!
           </p>
           <p>The word was: {word}</p>
+          <button
+            onClick={handlePlayAgain}
+            style={{
+              marginTop: "1rem",
+              padding: "0.5rem 1.5rem",
+              fontSize: "1rem",
+              fontWeight: "bold",
+              backgroundColor: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+          >
+            Play Me Again
+          </button>
         </div>
       )}
       <WordDisplay word={word} guessedLetters={guessedLetters} />
-      <Keyboard guessedLetters={guessedLetters} onGuess={handleGuess} />
+      <Keyboard
+        guessedLetters={guessedLetters}
+        onGuess={handleGuess}
+        disabled={hasWon || hasLost}
+      />
       {/* both compotents recieve guessedLetters so they stay in sync */}
       {/* WordDisplay uses it decide which letter to reveal, keyboard uses it to fade out already clicked buttons */}
       {/* onGuess={handledGuess} passes the function down to keyboard, wehn a button is clicked it can tell Game.tsx */}
