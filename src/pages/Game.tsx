@@ -1,3 +1,4 @@
+import HangmanImage from "../components/HangmanImage";
 import WordDisplay from "../components/WordDisplay";
 // useState is how React remembers things, a way to store values that React keeps track of
 import { useEffect, useState } from "react";
@@ -55,7 +56,7 @@ function Game() {
     .every((letter) => guessedLetters.includes(letter));
 
   // checks if incorrect guessed reached 6
-  const hasLost = incorrectGuesses.length >= 8;
+  const hasLost = incorrectGuesses.length >= 7;
 
   // useEffect runs code at a specific moment, without it the fetch would run on every re-render
   useEffect(() => {
@@ -89,8 +90,10 @@ function Game() {
       {/* <p>The word is: {word}</p> */}
 
       <p style={{ fontSize: "1.2rem" }}>
-        Incorrect guesses: {incorrectGuesses.length} / 8
+        Incorrect guesses: {incorrectGuesses.length} / 7
       </p>
+
+      <HangmanImage incorrectGuesses={incorrectGuesses.length} />
 
       {hasWon && (
         <div
