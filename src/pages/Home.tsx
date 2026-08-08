@@ -5,14 +5,58 @@ function Home() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-8">
-      <h1 className="text-6x1 font-bold">Hangman</h1>
-      <p className="text-xl italic">Placeholder</p>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+        gap: "2rem",
+      }}
+    >
+      <h1
+        style={{
+          fontSize: "5rem",
+          fontFamily: "UnifrakturMaguntia, cursive",
+          color: "#8b0000",
+          textShadow: "2px 2px 8px rgba(0,0,0,0.8)",
+        }}
+      >
+        Hangman
+      </h1>
+      <p
+        style={{
+          fontSize: "1.3rem",
+          fontStyle: "italic",
+          color: "#f5e6d0",
+          fontFamily: "Crimson Text, serif",
+        }}
+      >
+        {" "}
+        A curious game of words...
+      </p>
       <button
-        className="px-8 py-4 text-2xl border-4 border-black rounded-full hover:bg-black hover:text-white transition-all"
         onClick={() => navigate("/categories")}
         // onClick is an event listener
-        // transition-all makes hover effect animate smoothly instead of jumpiing instantely
+        style={{
+          padding: "1rem 2.5rem",
+          fontSize: "1.5rem",
+          fontFamily: "Crimson Text, serif",
+          color: "#f5e6d0",
+          backgroundColor: "transparent",
+          border: "2px solid #8b0000",
+          borderRadius: "4px",
+          cursor: "pointer",
+          letterSpacing: "0.1em",
+          transition: "all 0.3s ease",
+        }}
+        onMouseEnter={(e) => {
+          (e.target as HTMLButtonElement).style.backgroundColor = "#8b0000";
+        }}
+        onMouseLeave={(e) => {
+          (e.target as HTMLButtonElement).style.backgroundColor = "transparent";
+        }}
       >
         Play Me
       </button>
