@@ -17,7 +17,6 @@ function Game() {
   const [word, setWord] = useState("");
   const [loading, setLoading] = useState(true);
   // loading starts as true but once word arrives it is set to false
-
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   // stores an array of strings, every letter that has been guessed. starts as an empty array []
   // <string[]> it is specifically an array of strings
@@ -73,7 +72,21 @@ function Game() {
 
   // show "Loading..." message when waiting for word to arrive
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "100vh",
+          fontSize: "2rem",
+          fontFamily: "Crimson Text, serif",
+          color: "#f5e6d0",
+        }}
+      >
+        A word is being chosen...
+      </div>
+    );
   }
 
   return (
@@ -82,42 +95,97 @@ function Game() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "2rem",
-        padding: "4rem 1",
+        gap: "1.5rem",
+        padding: "3rem 1rem",
       }}
     >
-      <h1 className="text-4xl font-bold">{category}</h1>
+      <h1
+        style={{
+          fontSize: "3rem",
+          fontFamily: "UnifrakturMaguntia, cursive",
+          color: "#8b0000",
+          textShadow: "2px 2px 8px rgba(0,0,0,0.8)",
+        }}
+      >
+        {category}
+      </h1>
       {/* <p>The word is: {word}</p> */}
 
-      <p style={{ fontSize: "1.2rem" }}>
+      <p
+        style={{
+          fontSize: "1.1rem",
+          fontFamily: "Crimson Text, serif",
+          color: "#f5e6d0",
+          letterSpacing: "0.1em",
+        }}
+      >
         Incorrect guesses: {incorrectGuesses.length} / 7
       </p>
 
       <HangmanImage incorrectGuesses={incorrectGuesses.length} />
 
+      <WordDisplay word={word} guessedLetters={guessedLetters} />
+
+      <Keyboard
+        guessedLetters={guessedLetters}
+        onGuess={handleGuess}
+        disabled={hasWon || hasLost}
+      />
+      {/* both compotents recieve guessedLetters so they stay in sync */}
+      {/* WordDisplay uses it decide which letter to reveal, keyboard uses it to fade out already clicked buttons */}
+      {/* onGuess={handledGuess} passes the function down to keyboard, wehn a button is clicked it can tell Game.tsx */}
+
       {hasWon && (
         <div
           style={{
-            backgroundColor: "green",
-            color: "white",
-            padding: "2rem",
-            borderRadius: "8px",
-            textAlign: "center",
+            position: "fixed",
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0,0,0,0.85)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "1.5rem",
           }}
         >
-          <p style={{ fontSize: "2rem", fontWeight: "bold" }}>You Won!</p>
-          <p>The word was: {word}</p>
+          <h2
+            style={{
+              fontSize: "3rem",
+              fontFamily: "UnifrakturMaguntia, cursive",
+              color: "#ffd700",
+              textShadow: "2px 2px 8px rgba(0,0,0,0.8",
+            }}
+          >
+            Curiouser and curiouser! You Won!
+          </h2>
+          <p
+            style={{
+              fontSize: "1.3rem",
+              fontFamily: "Crimson Text. serif",
+              color: "#f5e6d0",
+            }}
+          >
+            The word was: <strong>{word}</strong>
+          </p>
           <button
             onClick={handlePlayAgain}
             style={{
-              marginTop: "1rem",
-              padding: "0.5rem 1.5rem",
-              fontSize: "1rem",
-              fontWeight: "bold",
-              backgroundColor: "white",
-              border: "none",
-              borderRadius: "4px",
+              padding: "0.8rem 2.5rem",
+              fontSize: "1.2rem",
+              fontFamily: "Pacifico, cursive",
+              color: "#f5e6d0",
+              backgroundColor: "transparent",
+              border: "2px solid #ffd700",
+              borderRadius: "10px",
               cursor: "pointer",
+              transition: "all 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              (e.target as HTMLButtonElement).style.backgroundColor = "#ffd700";
+              (e.target as HTMLButtonElement).style.color = "#f5e6d0";
             }}
           >
             Play Me Again
@@ -129,43 +197,63 @@ function Game() {
       {hasLost && (
         <div
           style={{
-            backgroundColor: "red",
-            color: "white",
-            padding: "2rem",
-            borderRadius: "8px",
-            textAlign: "center",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0,0,0,0.85)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "1.5rem",
           }}
         >
-          <p style={{ fontSize: "2rem", fontWeight: "bold" }}>
+          <h2
+            style={{
+              fontSize: "3rem",
+              fontFamily: "UnifrakturMaguntia, cursive",
+              color: "#8b0000",
+              textShadow: "2px 2px 8px rgba(0,0,0,0.8)",
+            }}
+          >
             Off with his Head!
+          </h2>
+          <p
+            style={{
+              fontSize: "1.3rem",
+              fontFamily: "Crimson Text, serif",
+              color: "#f5e6d0",
+            }}
+          >
+            The word was: <strong>{word}</strong>
           </p>
-          <p>The word was: {word}</p>
           <button
             onClick={handlePlayAgain}
             style={{
-              marginTop: "1rem",
-              padding: "0.5rem 1.5rem",
-              fontSize: "1rem",
-              fontWeight: "bold",
-              backgroundColor: "white",
-              border: "none",
-              borderRadius: "4px",
+              padding: "0.8rem 2.5rem",
+              fontSize: "1.2rem",
+              fontFamily: "Pacifico, cursive",
+              color: "#f5e6d0",
+              backgroundColor: "transparent",
+              border: "2px solid #8b0000",
+              borderRadius: "10px",
               cursor: "pointer",
+              transition: "all 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              (e.target as HTMLButtonElement).style.backgroundColor = "#8b0000";
+            }}
+            onMouseLeave={(e) => {
+              (e.target as HTMLButtonElement).style.backgroundColor =
+                "transparent";
             }}
           >
             Play Me Again
           </button>
         </div>
       )}
-      <WordDisplay word={word} guessedLetters={guessedLetters} />
-      <Keyboard
-        guessedLetters={guessedLetters}
-        onGuess={handleGuess}
-        disabled={hasWon || hasLost}
-      />
-      {/* both compotents recieve guessedLetters so they stay in sync */}
-      {/* WordDisplay uses it decide which letter to reveal, keyboard uses it to fade out already clicked buttons */}
-      {/* onGuess={handledGuess} passes the function down to keyboard, wehn a button is clicked it can tell Game.tsx */}
     </div>
   );
 }

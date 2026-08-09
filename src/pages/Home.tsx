@@ -42,7 +42,7 @@ function Home() {
         style={{
           padding: "1rem 2.5rem",
           fontSize: "1.5rem",
-          fontFamily: "Crimson Text, serif",
+          fontFamily: "Pacifico, cursive",
           color: "#f5e6d0",
           backgroundColor: "transparent",
           border: "2px solid #8b0000",
