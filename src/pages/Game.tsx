@@ -101,7 +101,7 @@ function Game() {
     >
       <h1
         style={{
-          fontSize: "3rem",
+          fontSize: "4rem",
           fontFamily: "UnifrakturMaguntia, cursive",
           color: "#8b0000",
           textShadow: "2px 2px 8px rgba(0,0,0,0.8)",
@@ -113,7 +113,7 @@ function Game() {
 
       <p
         style={{
-          fontSize: "1.1rem",
+          fontSize: "1.4rem",
           fontFamily: "Crimson Text, serif",
           color: "#f5e6d0",
           letterSpacing: "0.1em",
@@ -155,7 +155,7 @@ function Game() {
             style={{
               fontSize: "3rem",
               fontFamily: "UnifrakturMaguntia, cursive",
-              color: "#ffd700",
+              color: "#c9a84c",
               textShadow: "2px 2px 8px rgba(0,0,0,0.8",
             }}
           >
@@ -176,15 +176,16 @@ function Game() {
               padding: "0.8rem 2.5rem",
               fontSize: "1.2rem",
               fontFamily: "Pacifico, cursive",
-              color: "#f5e6d0",
+              color: "#c9a84c",
               backgroundColor: "transparent",
-              border: "2px solid #ffd700",
+              border: "2px solid #c9a84c",
               borderRadius: "10px",
               cursor: "pointer",
               transition: "all 0.3s ease",
             }}
             onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = "#ffd700";
+              (e.target as HTMLButtonElement).style.backgroundColor =
+                "transparent";
               (e.target as HTMLButtonElement).style.color = "#f5e6d0";
             }}
           >

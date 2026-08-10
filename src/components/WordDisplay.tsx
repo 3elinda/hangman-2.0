@@ -35,6 +35,7 @@ function WordDisplay({ word, guessedLetters }: Props) {
               fontWeight: "bold",
               minWidth: "2rem",
               textAlign: "center",
+              color: "#f5e6d0",
             }}
           >
             {guessedLetters.includes(letter) ? letter : ""}
@@ -43,9 +44,9 @@ function WordDisplay({ word, guessedLetters }: Props) {
           </span>
           <div
             style={{
-              width: "2rem",
+              width: "3rem",
               height: "4px",
-              backgroundColor: "black",
+              backgroundColor: "#f5e6d0",
               marginTop: "4px",
             }}
           />

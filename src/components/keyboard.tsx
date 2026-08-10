@@ -18,7 +18,7 @@ function Keyboard({ guessedLetters, onGuess, disabled = false }: Props) {
         flexWrap: "wrap",
         gap: "8px",
         justifyContent: "center",
-        maxWidth: "500px",
+        maxWidth: "700px",
       }}
     >
       {LETTERS.map((letter) => (
@@ -27,15 +27,17 @@ function Keyboard({ guessedLetters, onGuess, disabled = false }: Props) {
           onClick={() => onGuess(letter)}
           disabled={guessedLetters.includes(letter) || disabled}
           style={{
-            width: "2.5rem",
-            height: "2.5rem",
+            width: "3.5rem",
+            height: "3.5rem",
             fontSize: "1rem",
             fontWeight: "bold",
-            border: "2px solid black",
+            fontFamily: "Crimson text, serif",
+            border: "2px solid #8b0000",
             borderRadius: "4px",
             cursor: guessedLetters.includes(letter) ? "not-allowed" : "pointer",
             opacity: guessedLetters.includes(letter) || disabled ? 0.3 : 1,
-            backgroundColor: "white",
+            backgroundColor: "transparent",
+            color: "#f5e6d0",
           }}
         >
           {letter}
