@@ -1,8 +1,8 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import HangmanImage from "../components/HangmanImage";
 import WordDisplay from "../components/WordDisplay";
 // useState is how React remembers things, a way to store values that React keeps track of
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { getWord } from "../services/wordService";
 import Keyboard from "../components/keyboard";
 
@@ -10,6 +10,7 @@ function Game() {
   // useLocation is a React Router tool that lets info to be read about current page, including any state passed to it
   // location.state?.category read the category name from that "note" passed. The ? is a safety check
   const location = useLocation();
+  const navigate = useNavigate();
   const category = location.state?.category;
 
   // word is the current value which starts as an empty string
@@ -99,17 +100,66 @@ function Game() {
         padding: "3rem 1rem",
       }}
     >
-      <h1
+      <div
         style={{
-          fontSize: "4rem",
-          fontFamily: "UnifrakturMaguntia, cursive",
-          color: "#8b0000",
-          textShadow: "2px 2px 8px rgba(0,0,0,0.8)",
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+          paddingLeft: "2rem",
+          paddingRight: "2rem",
         }}
       >
-        {category}
-      </h1>
-      {/* <p>The word is: {word}</p> */}
+        {/* This way sign on the left */}
+        <div
+          onClick={() => navigate("/categories")}
+          style={{
+            backgroundColor: "#8b0000",
+            clipPath:
+              "polygon(10% 0%, 100% 0%, 93% 50%, 100% 100%, 10% 100%, 0% 50%",
+            height: "5rem",
+            width: "18rem",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginLeft: "2rem",
+            cursor: "pointer",
+            alignSelf: "flex-start",
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "#1a0a0a",
+              clipPath:
+                "polygon(10% 0%, 100% 0%, 93% 50%, 100% 100%, 10% 100%, 0% 50%)",
+              height: "4rem",
+              width: "90%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontSize: "1.2rem",
+              fontFamily: "Pacifico, cursive",
+              color: "#f5e6d0",
+            }}
+          >
+            This Way
+          </div>
+        </div>
+        {/* Title centered */}
+        <h1
+          style={{
+            fontSize: "4rem",
+            fontFamily: "UnifrakturMaguntia, cursive",
+            color: "#8b0000",
+            textShadow: "2px 2px 8px rgba(0,0,0,0.8)",
+            flex: 1,
+            textAlign: "center",
+          }}
+        >
+          {category}
+        </h1>
+        {/* Invisible spacer to balance the left sign */}
+        <div style={{ width: "18rem", flexShrink: 0 }}></div>
+      </div>
 
       <p
         style={{
