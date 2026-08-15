@@ -97,7 +97,7 @@ function Game() {
         flexDirection: "column",
         alignItems: "center",
         gap: "1.5rem",
-        padding: "3rem 1rem",
+        padding: "2.5rem 1rem",
       }}
     >
       <div
