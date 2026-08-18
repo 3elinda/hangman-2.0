@@ -71,6 +71,27 @@ function Game() {
   }, [category]);
   // dependacy array so React only re-runs effect if category changes
 
+  useEffect(() => {
+    function handleKeyPress(e: KeyboardEvent) {
+      const letter = e.key.toLowerCase();
+      if (
+        letter.length === 1 &&
+        letter >= "a" &&
+        letter <= "z" &&
+        // makes sure its only letter(a-z)
+        !guessedLetters.includes(letter) &&
+        !hasWon &&
+        !hasLost
+      ) {
+        handleGuess(letter);
+      }
+    }
+    window.addEventListener("keydown", handleKeyPress);
+    // listens for pressed keys on the whole page
+    return () => window.removeEventListener("keydown", handleKeyPress);
+    // cleanup function, it removes listeners so it doesn't keep running in the background if user leaves page
+  }, [guessedLetters, hasWon, hasLost]);
+
   // show "Loading..." message when waiting for word to arrive
   if (loading) {
     return (
@@ -96,7 +117,7 @@ function Game() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "1.5rem",
+        gap: "2.5rem",
         padding: "2.5rem 1rem",
       }}
     >
