@@ -21,16 +21,7 @@ function Categories() {
       }}
     >
       {/* Top row with This Way sign and title*/}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          width: "100%",
-          paddingLeft: "2rem",
-          paddingRight: "2rem",
-          paddingTop: "2rem",
-        }}
-      >
+      <div className="top-row">
         {/* This Way sign on the left */}
         <div
           onClick={() => navigate("/")}
@@ -81,7 +72,7 @@ function Categories() {
         </h1>
 
         {/* Invisible buttons */}
-        <div style={{ width: "18rem", flexShrink: 0 }} />
+        <div className="spacer" />
       </div>
 
       {/* Centered content */}

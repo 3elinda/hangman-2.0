@@ -121,15 +121,8 @@ function Game() {
         padding: "2.5rem 1rem",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          width: "100%",
-          paddingLeft: "2rem",
-          paddingRight: "2rem",
-        }}
-      >
+      {/* Top row with sign and title */}
+      <div className="top-row">
         {/* This way sign on the left */}
         <div
           onClick={() => navigate("/categories")}
@@ -178,8 +171,8 @@ function Game() {
         >
           {category}
         </h1>
-        {/* Invisible spacer to balance the left sign */}
-        <div style={{ width: "18rem", flexShrink: 0 }}></div>
+        {/* Invisible spacer*/}
+        <div className="spacer" />
       </div>
 
       <p
