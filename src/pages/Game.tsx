@@ -74,6 +74,12 @@ function Game() {
   useEffect(() => {
     function handleKeyPress(e: KeyboardEvent) {
       const letter = e.key.toLowerCase();
+      // checks if Enter was pressed and game is over, if both true then it calls handlePlayAgain
+      // Then returns so the rest of the function doesn't run
+      if (e.key === "Enter" && (hasWon || hasLost)) {
+        handlePlayAgain();
+        return;
+      }
       if (
         letter.length === 1 &&
         letter >= "a" &&
