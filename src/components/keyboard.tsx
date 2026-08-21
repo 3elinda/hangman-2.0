@@ -40,7 +40,7 @@ function Keyboard({ guessedLetters, onGuess, disabled = false }: Props) {
             color: "#f5e6d0",
           }}
         >
-          {letter}
+          {letter.toUpperCase()}
         </button>
       ))}
     </div>

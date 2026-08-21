@@ -38,7 +38,7 @@ function WordDisplay({ word, guessedLetters }: Props) {
               color: "#f5e6d0",
             }}
           >
-            {guessedLetters.includes(letter) ? letter : ""}
+            {guessedLetters.includes(letter) ? letter.toUpperCase() : ""}
             {/* {guessedLetters.includes(letter) checks if this letter has been guessed yet and letter is shown if yes.
               If no, nothing is shown expect for the line underneath */}
           </span>
