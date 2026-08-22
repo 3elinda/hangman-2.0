@@ -31,7 +31,7 @@ function Keyboard({ guessedLetters, onGuess, disabled = false }: Props) {
             height: "3.5rem",
             fontSize: "1rem",
             fontWeight: "bold",
-            fontFamily: "Crimson text, serif",
+            fontFamily: "Pacifico, serif",
             border: "2px solid #8b0000",
             borderRadius: "4px",
             cursor: guessedLetters.includes(letter) ? "not-allowed" : "pointer",

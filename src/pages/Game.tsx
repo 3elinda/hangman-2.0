@@ -238,7 +238,7 @@ function Game() {
               color: "#f5e6d0",
             }}
           >
-            The word was: <strong>{word}</strong>
+            The word was: <strong>{word.toUpperCase()}</strong>
           </p>
           <button
             onClick={handlePlayAgain}
@@ -298,7 +298,7 @@ function Game() {
               color: "#f5e6d0",
             }}
           >
-            The word was: <strong>{word}</strong>
+            The word was: <strong>{word.toUpperCase()}</strong>
           </p>
           <button
             onClick={handlePlayAgain}
